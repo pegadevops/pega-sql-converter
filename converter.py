@@ -11,6 +11,8 @@ def convert(sqlText, sqlInserts):
         # else surround with quotes
         else:
             insert = '\'' + insert + '\''
+        if '&' in insert:
+            insert = insert.replace('&', '\'|| chr(38) || \'')
         sqlText = sqlText.replace('?', insert, 1)
         start = end + 2
     return sqlText
